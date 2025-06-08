@@ -1,71 +1,203 @@
 <!DOCTYPE html>
-<html lang="en">
-
-
-<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<html lang="it">
 <head>
-    <!-- Meta Tags -->
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="https://mc-heads.net/avatar/skun0">
-    
-    <!-- Title -->
-    <title>About Skuno</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>skuno.click</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
 
-    <!-- Css -->
-    <link rel="stylesheet" href="assets/css/style.css">
+  /* RESET */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
 
-    <!-- Javascript -->
-    
-    <!-- Fonts -->
-    <link rel="stylesheet" href="../cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous">
+  body, html {
+    height: 100%;
+    background: #0a0a0a;
+    font-family: 'Russo One', sans-serif;
+    color: #00ffff;
+    overflow-x: hidden;
+  }
 
-    <video autoplay loop muted>
-        <source src="assets/vid/background.mp4" type="video/mp4">
-    </video>
+  /* BACKGROUND PARTICLES */
+  #particles {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+  }
+
+  /* MAIN CONTAINER */
+  .container {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 1;
+  }
+
+  /* CIRCLE IMAGE */
+  .circle-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 4px solid #00ffff;
+    box-shadow: 0 0 15px #00ffff;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+    transition: box-shadow 0.3s ease;
+  }
+
+  .circle-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .circle-image:hover {
+    box-shadow: 0 0 25px 6px #00ffff;
+  }
+
+  /* Subtitle */
+  .subtitle {
+    margin-top: 0.5rem;
+    font-size: 1.5rem;
+    color: #0ff;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+  }
+
+  /* Menu Links */
+  nav {
+    margin-top: 3rem;
+    display: flex;
+    gap: 3rem;
+  }
+
+  nav a {
+    font-size: 1.3rem;
+    color: #00ffff;
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+  nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background: #00ffff;
+    transition: width 0.3s ease;
+  }
+  nav a:hover {
+    color: #fff;
+  }
+  nav a:hover::after {
+    width: 100%;
+  }
+
+  /* Responsive */
+  @media(max-width: 600px) {
+    .circle-image {
+      width: 130px;
+      height: 130px;
+    }
+    .subtitle {
+      font-size: 1rem;
+    }
+    nav {
+      gap: 1.5rem;
+      flex-direction: column;
+    }
+  }
+</style>
 </head>
 <body>
-    
-    <header>
-        <nav>
-            <div class="header_logo">
-                <img src="assets/imgs/headerimg.jpg" alt="" srcset="">
-            </div>
-            <div class="header_links">
-                <ul class="nav_links">
-                    <li class="nav_link"><a href="#"></a></li>
-                    <!--<li class="nav_link"><a href="#work">work</a></li> -->
-                    <!-- <li class="nav_link"><a href="#">Repos</a></li> -->
-                </ul>
-            </div>
-        </nav>
-    </header>
-    
-    <section class="main">
-        <img src="assets/imgs/profilepicture.png" alt="" srcset="">
-        <span>Skuno</span>
-        <p>Developer from Italy | dsc.gg/blackstarr</p>
-        <ul>
-            
 
-            <li><a target="_blank" href="https://t.me/skun0"><i class="fab fa-telegram"></i></a></li>
-            <svg viewBox="-8 -8 16 16" class="h-7 w-7 text-[#020101] duration-300 hover:scale-110 hover:text-[#020101]" shape-rendering="crispEdges" width="32" height="32" onclick="window.open('https://namemc.com/skun0', '_blank')">
-			
-            <path d="M-5-5L+3-5L+3-3L+5-3L+5+5L+3+5L+3-3L-3-3L-3+5L-5+5" style="fill: rgb(166, 168, 184);">
-            </svg>
+  <canvas id="particles"></canvas>
 
-            <div class="tooltip"><li><a target="_blank" title="skun0"><i class="fab fa-discord"></i></a></li>
-                <span class="tooltiptext">skun0</span>
-            </div>
+  <div class="container">
+    <div class="circle-image">
+      <img src="img.jpg" alt="image" />
+    </div>
+    <p class="subtitle">Python & Javascript Developer</p>
 
-        </ul>
-		    <audio controls autoplay>
-        <source src="moonlight.mp3" type="audio/mp3">
-    </audio>
-    </section>
+    <nav>
+      <a href="contact.html">Contacts</a>
+    </nav>
+  </div>
+
+  <script>
+    // Particle Background Effect (canvas)
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let particles = [];
+
+    function resize() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.size = Math.random() * 2 + 1;
+        this.speedX = (Math.random() - 0.5) * 0.5;
+        this.speedY = (Math.random() - 0.5) * 0.5;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        if(this.x < 0) this.x = width;
+        else if(this.x > width) this.x = 0;
+        if(this.y < 0) this.y = height;
+        else if(this.y > height) this.y = 0;
+      }
+      draw() {
+        ctx.fillStyle = '#00ffff';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function initParticles(num) {
+      particles = [];
+      for(let i=0; i<num; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animate);
+    }
+
+    initParticles(80);
+    animate();
+  </script>
 
 </body>
-
-
-</html> 
+</html>
