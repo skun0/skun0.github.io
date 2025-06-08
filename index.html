@@ -7,7 +7,6 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
 
-  /* RESET */
   * {
     margin: 0; padding: 0; box-sizing: border-box;
   }
@@ -20,7 +19,6 @@
     overflow-x: hidden;
   }
 
-  /* BACKGROUND PARTICLES */
   #particles {
     position: fixed;
     top: 0; left: 0;
@@ -28,7 +26,6 @@
     z-index: 0;
   }
 
-  /* MAIN CONTAINER */
   .container {
     position: relative;
     height: 100vh;
@@ -40,7 +37,6 @@
     z-index: 1;
   }
 
-  /* CIRCLE IMAGE */
   .circle-image {
     width: 200px;
     height: 200px;
@@ -66,7 +62,6 @@
     box-shadow: 0 0 25px 6px #00ffff;
   }
 
-  /* Subtitle */
   .subtitle {
     margin-top: 0.5rem;
     font-size: 1.5rem;
@@ -75,7 +70,6 @@
     letter-spacing: 0.1em;
   }
 
-  /* Menu Links */
   nav {
     margin-top: 3rem;
     display: flex;
@@ -89,6 +83,7 @@
     position: relative;
     transition: color 0.3s ease;
   }
+
   nav a::after {
     content: '';
     position: absolute;
@@ -99,14 +94,15 @@
     background: #00ffff;
     transition: width 0.3s ease;
   }
+
   nav a:hover {
     color: #fff;
   }
+
   nav a:hover::after {
     width: 100%;
   }
 
-  /* Responsive */
   @media(max-width: 600px) {
     .circle-image {
       width: 130px;
@@ -124,80 +120,77 @@
 </head>
 <body>
 
-  <canvas id="particles"></canvas>
+<canvas id="particles"></canvas>
 
-  <div class="container">
-    <div class="circle-image">
-      <img src="img.jpg" alt="image" />
-    </div>
-    <p class="subtitle">Python & Javascript Developer</p>
-
-    <nav>
-      <a href="contact.html">Contacts</a>
-    </nav>
+<div class="container">
+  <div class="circle-image">
+    <img src="img.jpg" alt="image" />
   </div>
+  <p class="subtitle">Python & Javascript Developer</p>
+  <nav>
+    <a href="contact.html">Contacts</a>
+  </nav>
+</div>
 
-  <script>
-    // Particle Background Effect (canvas)
-    const canvas = document.getElementById('particles');
-    const ctx = canvas.getContext('2d');
-    let width, height;
-    let particles = [];
+<script>
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let width, height;
+  let particles = [];
 
-    function resize() {
-      width = window.innerWidth;
-      height = window.innerHeight;
-      canvas.width = width;
-      canvas.height = height;
+  function resize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+
+  class Particle {
+    constructor() {
+      this.x = Math.random() * width;
+      this.y = Math.random() * height;
+      this.size = Math.random() * 2 + 1;
+      this.speedX = (Math.random() - 0.5) * 0.5;
+      this.speedY = (Math.random() - 0.5) * 0.5;
     }
-
-    window.addEventListener('resize', resize);
-    resize();
-
-    class Particle {
-      constructor() {
-        this.x = Math.random() * width;
-        this.y = Math.random() * height;
-        this.size = Math.random() * 2 + 1;
-        this.speedX = (Math.random() - 0.5) * 0.5;
-        this.speedY = (Math.random() - 0.5) * 0.5;
-      }
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-
-        if(this.x < 0) this.x = width;
-        else if(this.x > width) this.x = 0;
-        if(this.y < 0) this.y = height;
-        else if(this.y > height) this.y = 0;
-      }
-      draw() {
-        ctx.fillStyle = '#00ffff';
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-      }
+    update() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+      if(this.x < 0) this.x = width;
+      else if(this.x > width) this.x = 0;
+      if(this.y < 0) this.y = height;
+      else if(this.y > height) this.y = 0;
     }
-
-    function initParticles(num) {
-      particles = [];
-      for(let i=0; i<num; i++) {
-        particles.push(new Particle());
-      }
+    draw() {
+      ctx.fillStyle = '#00ffff';
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
     }
+  }
 
-    function animate() {
-      ctx.clearRect(0, 0, width, height);
-      particles.forEach(p => {
-        p.update();
-        p.draw();
-      });
-      requestAnimationFrame(animate);
+  function initParticles(num) {
+    particles = [];
+    for(let i=0; i<num; i++) {
+      particles.push(new Particle());
     }
+  }
 
-    initParticles(80);
-    animate();
-  </script>
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+    particles.forEach(p => {
+      p.update();
+      p.draw();
+    });
+    requestAnimationFrame(animate);
+  }
+
+  initParticles(80);
+  animate();
+</script>
 
 </body>
 </html>
